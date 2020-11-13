@@ -49,13 +49,7 @@ public class Command_report extends FreedomCommand
 
         boolean logged = false;
 
-        if (plugin.dc.enabled)
-        {
-            logged = plugin.dc.sendReport(playerSender, player, report);
-        }
-
-        msg(ChatColor.GREEN + "Thank you, your report has been successfully logged."
-                + (logged ? ChatColor.RED + "\nNote: This report has been logged to a discord channel, as with any report system, spamming reports can lead to you getting banned." : ""));
+        msg(ChatColor.GREEN + "Thank you, your report has been successfully logged.");
 
         return true;
     }

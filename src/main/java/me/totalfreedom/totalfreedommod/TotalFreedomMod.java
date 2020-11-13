@@ -18,28 +18,18 @@ import me.totalfreedom.totalfreedommod.bridge.BukkitTelnetBridge;
 import me.totalfreedom.totalfreedommod.bridge.CoreProtectBridge;
 import me.totalfreedom.totalfreedommod.bridge.EssentialsBridge;
 import me.totalfreedom.totalfreedommod.bridge.LibsDisguisesBridge;
-import me.totalfreedom.totalfreedommod.bridge.TFGuildsBridge;
 import me.totalfreedom.totalfreedommod.bridge.WorldEditBridge;
 import me.totalfreedom.totalfreedommod.bridge.WorldGuardBridge;
 import me.totalfreedom.totalfreedommod.caging.Cager;
 import me.totalfreedom.totalfreedommod.command.CommandLoader;
 import me.totalfreedom.totalfreedommod.config.MainConfig;
-import me.totalfreedom.totalfreedommod.discord.Discord;
 import me.totalfreedom.totalfreedommod.freeze.Freezer;
-import me.totalfreedom.totalfreedommod.fun.CurseListener;
-import me.totalfreedom.totalfreedommod.fun.ItemFun;
-import me.totalfreedom.totalfreedommod.fun.Jumppads;
-import me.totalfreedom.totalfreedommod.fun.Landminer;
-import me.totalfreedom.totalfreedommod.fun.MP44;
-import me.totalfreedom.totalfreedommod.fun.Trailer;
 import me.totalfreedom.totalfreedommod.httpd.HTTPDaemon;
 import me.totalfreedom.totalfreedommod.permissions.PermissionConfig;
 import me.totalfreedom.totalfreedommod.permissions.PermissionManager;
 import me.totalfreedom.totalfreedommod.player.PlayerList;
 import me.totalfreedom.totalfreedommod.punishments.PunishmentList;
 import me.totalfreedom.totalfreedommod.rank.RankManager;
-import me.totalfreedom.totalfreedommod.shop.Shop;
-import me.totalfreedom.totalfreedommod.shop.Votifier;
 import me.totalfreedom.totalfreedommod.sql.SQLite;
 import me.totalfreedom.totalfreedommod.staff.ActivityLog;
 import me.totalfreedom.totalfreedommod.staff.StaffList;
@@ -97,17 +87,13 @@ public class TotalFreedomMod extends JavaPlugin
     public AntiNuke nu;
     public AntiSpam as;
     public PlayerList pl;
-    public Shop sh;
-    public Votifier vo;
     public SQLite sql;
     public Announcer an;
     public ChatManager cm;
-    public Discord dc;
     public PunishmentList pul;
     public BanManager bm;
     public IndefiniteBanList im;
     public PermissionManager pem;
-    public Reddit rd;
     public GameRuleHandler gr;
     public CommandSpy cs;
     public Cager ca;
@@ -116,34 +102,23 @@ public class TotalFreedomMod extends JavaPlugin
     public PVPBlocker pbl;
     public Orbiter or;
     public Muter mu;
-    public Fuckoff fo;
     public AutoKick ak;
     public AutoEject ae;
     public Monitors mo;
     public MovementValidator mv;
     public ServerPing sp;
-    public CurseListener cul;
-    public ItemFun it;
-    public Landminer lm;
-    public MP44 mp;
-    public Jumppads jp;
-    public Trailer tr;
     public HTTPDaemon hd;
     public WorldRestrictions wr;
     public SignBlocker snp;
     public EntityWiper ew;
-    public Sitter st;
     public VanishHandler vh;
-    public Pterodactyl ptero;
 
-    //public HubWorldRestrictions hwr;
     //
     // Bridges
     public BukkitTelnetBridge btb;
     public EssentialsBridge esb;
     public LibsDisguisesBridge ldb;
     public CoreProtectBridge cpb;
-    public TFGuildsBridge tfg;
     public WorldEditBridge web;
     public WorldGuardBridge wgb;
 
@@ -216,22 +191,16 @@ public class TotalFreedomMod extends JavaPlugin
         as = new AntiSpam();
         wr = new WorldRestrictions();
         pl = new PlayerList();
-        sh = new Shop();
-        vo = new Votifier();
         an = new Announcer();
         cm = new ChatManager();
-        dc = new Discord();
         pul = new PunishmentList();
         bm = new BanManager();
         im = new IndefiniteBanList();
         pem = new PermissionManager();
-        rd = new Reddit();
         gr = new GameRuleHandler();
         snp = new SignBlocker();
         ew = new EntityWiper();
-        st = new Sitter();
         vh = new VanishHandler();
-        ptero = new Pterodactyl();
 
         // Single admin utils
         cs = new CommandSpy();
@@ -241,7 +210,6 @@ public class TotalFreedomMod extends JavaPlugin
         mu = new Muter();
         ebl = new EditBlocker();
         pbl = new PVPBlocker();
-        fo = new Fuckoff();
         ak = new AutoKick();
         ae = new AutoEject();
         mo = new Monitors();
@@ -249,13 +217,6 @@ public class TotalFreedomMod extends JavaPlugin
         mv = new MovementValidator();
         sp = new ServerPing();
 
-        // Fun
-        cul = new CurseListener();
-        it = new ItemFun();
-        lm = new Landminer();
-        mp = new MP44();
-        jp = new Jumppads();
-        tr = new Trailer();
         // HTTPD
         hd = new HTTPDaemon();
 
@@ -264,7 +225,6 @@ public class TotalFreedomMod extends JavaPlugin
         cpb = new CoreProtectBridge();
         esb = new EssentialsBridge();
         ldb = new LibsDisguisesBridge();
-        tfg = new TFGuildsBridge();
         web = new WorldEditBridge();
         wgb = new WorldGuardBridge();
 

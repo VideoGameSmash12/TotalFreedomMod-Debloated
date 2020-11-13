@@ -7,7 +7,6 @@ public enum PermissionEntry
 {
     REMOVE("remove"),
     OPERATORS("operators"),
-    MASTER_BUILDERS("master_builders"),
     ADMINS("admins"),
     SENIOR_ADMINS("senior_admins");
 

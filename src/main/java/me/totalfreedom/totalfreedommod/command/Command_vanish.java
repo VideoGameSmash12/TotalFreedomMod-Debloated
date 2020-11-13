@@ -44,7 +44,6 @@ public class Command_vanish extends FreedomCommand
                 msg("You have unvanished.", ChatColor.GOLD);
                 FUtil.bcastMsg(plugin.rm.craftLoginMessage(playerSender, null));
                 FUtil.bcastMsg(playerSender.getName() + " joined the game.", ChatColor.YELLOW);
-                plugin.dc.messageChatChannel("**" + playerSender.getName() + " joined the server" + "**");
             }
 
             PlayerData playerData = plugin.pl.getData(playerSender);
@@ -90,7 +89,6 @@ public class Command_vanish extends FreedomCommand
             {
                 msg ("You have vanished.", ChatColor.GOLD);
                 FUtil.bcastMsg(playerSender.getName() + " left the game.", ChatColor.YELLOW);
-                plugin.dc.messageChatChannel("**" + playerSender.getName() + " left the server" + "**");
             }
 
             FLog.info(playerSender.getName() + " is now vanished.");

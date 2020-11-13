@@ -282,7 +282,7 @@ public class Module_schematic extends HTTPDModule
     {
         StaffMember staffMemberEntry = plugin.sl.getEntryByIp(remoteAddress);
         PlayerData data = plugin.pl.getDataByIp(remoteAddress);
-        return ((staffMemberEntry != null && staffMemberEntry.isActive()) || data != null && data.isMasterBuilder());
+        return ((staffMemberEntry != null && staffMemberEntry.isActive()));
     }
 
     private static class SchematicTransferException extends Exception

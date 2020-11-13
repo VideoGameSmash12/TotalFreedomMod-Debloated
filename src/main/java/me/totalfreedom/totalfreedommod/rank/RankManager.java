@@ -66,12 +66,6 @@ public class RankManager extends FreedomService
             return Title.VERIFIED_STAFF;
         }
 
-        // Master builders show up if they are not staff
-        if (plugin.pl.getData(player).isMasterBuilder() && !plugin.sl.isStaff(player))
-        {
-            return Title.MASTER_BUILDER;
-        }
-
         return getRank(player);
     }
 
@@ -131,7 +125,7 @@ public class RankManager extends FreedomService
 
     public Rank getRank(Player player)
     {
-        if (plugin.sl.isStaffImpostor(player) || plugin.pl.isPlayerImpostor(player))
+        if (plugin.sl.isStaffImpostor(player))
         {
             return Rank.IMPOSTOR;
         }
@@ -168,7 +162,7 @@ public class RankManager extends FreedomService
         FPlayer fPlayer = plugin.pl.getPlayer(player);
         PlayerData data = plugin.pl.getData(player);
         Displayable display = getDisplay(player);
-        if (plugin.sl.isStaff(player) || data.isMasterBuilder() || FUtil.isDeveloper(player))
+        if (plugin.sl.isStaff(player) || FUtil.isDeveloper(player))
         {
             String displayName = display.getColor() + player.getName();
             player.setPlayerListName(displayName);
@@ -181,7 +175,6 @@ public class RankManager extends FreedomService
         fPlayer.setTag(getTag(player, display.getColoredTag()));
         updatePlayerTeam(player);
         plugin.pem.setPermissions(player);
-        plugin.rd.updateFlair(player);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -214,17 +207,13 @@ public class RankManager extends FreedomService
         }
 
         // Handle impostors
-        boolean isImpostor = plugin.sl.isStaffImpostor(player) || plugin.pl.isPlayerImpostor(player);
+        boolean isImpostor = plugin.sl.isStaffImpostor(player);
         if (isImpostor)
         {
             FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " is " + Rank.IMPOSTOR.getColoredLoginMessage());
             if (plugin.sl.isStaffImpostor(player))
             {
                 FUtil.bcastMsg("Warning: " + player.getName() + " has been flagged as a staff impostor and has been frozen!", ChatColor.RED);
-            }
-            else if (plugin.pl.isPlayerImpostor(player))
-            {
-                FUtil.bcastMsg("Warning: " + player.getName() + " has been flagged as a player impostor and has been frozen!", ChatColor.RED);
             }
             String displayName = Rank.IMPOSTOR.getColor() + player.getName();
             player.setPlayerListName(StringUtils.substring(displayName, 0, 16));
@@ -237,7 +226,7 @@ public class RankManager extends FreedomService
         }
 
         // Broadcast login message
-        if (isStaff || FUtil.isDeveloper(player) || plugin.pl.getData(player).isMasterBuilder() || plugin.pl.getData(player).hasLoginMessage())
+        if (isStaff || FUtil.isDeveloper(player) || plugin.pl.getData(player).hasLoginMessage())
         {
             if (!plugin.sl.isVanished(player.getName()))
             {
@@ -247,14 +236,6 @@ public class RankManager extends FreedomService
 
         // Set display
         updateDisplay(player);
-
-        if (!plugin.pl.isPlayerImpostor(player) && target.hasVerification())
-        {
-            if (target.getTag() != null)
-            {
-                plugin.pl.getData(player).setTag(FUtil.colorize(target.getTag()));
-            }
-        }
     }
 
     public String craftLoginMessage(Player player, String message)

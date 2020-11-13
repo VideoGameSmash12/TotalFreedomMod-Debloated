@@ -53,14 +53,6 @@ public class WorldRestrictions extends FreedomService
 
     public boolean doRestrict(Player player)
     {
-        if (!plugin.pl.getData(player).isMasterBuilder() && !plugin.pl.canManageMasterBuilders(player.getName()))
-        {
-            if (player.getWorld().equals(plugin.wm.masterBuilderWorld.getWorld()) || player.getWorld().equals(plugin.wm.hubworld.getWorld()))
-            {
-                return true;
-            }
-        }
-
         return !plugin.sl.isStaff(player) && player.getWorld().equals(plugin.wm.staffworld.getWorld());
     }
 
@@ -132,44 +124,17 @@ public class WorldRestrictions extends FreedomService
         {
             /* This is a very poor way of blocking WorldEdit commands, all the methods I know of
                for obtaining a list of a plugin's commands are returning null for world edit. */
-            String allowed = player.getWorld().equals(plugin.wm.staffworld.getWorld()) ? "Staff" : "Master Builders";
-
             if (command.startsWith("/") || BLOCKED_WORLDEDIT_COMMANDS.contains(command))
             {
-                player.sendMessage(ChatColor.RED + "Only " + allowed + " are allowed to use WorldEdit here.");
+                player.sendMessage(ChatColor.RED + "Only Staff are allowed to use WorldEdit here.");
                 event.setCancelled(true);
             }
 
             if (command.equals("coreprotect") || command.equals("core") || command.equals("co"))
             {
-                player.sendMessage(ChatColor.RED + "Only " + allowed + " are allowed to use CoreProtect here.");
+                player.sendMessage(ChatColor.RED + "Only Staff are allowed to use CoreProtect here.");
                 event.setCancelled(true);
             }
         }
-
-        if (player.getWorld().equals(Bukkit.getWorld("plotworld")))
-        {
-            if (BLOCKED_ESSENTIALS_COMMANDS.contains(command))
-            {
-                player.sendMessage(ChatColor.RED + "Sorry, this command is restricted in the plotworld");
-                event.setCancelled(true);
-            }
-        }
-    }
-
-    public void protectWorld(World world)
-    {
-        if (!plugin.wgb.isEnabled())
-        {
-            return;
-        }
-
-        RegionManager regionManager = plugin.wgb.getRegionManager(world);
-
-        GlobalProtectedRegion region = new GlobalProtectedRegion("__global__");
-
-        region.setFlags(flags);
-
-        regionManager.addRegion(region);
     }
 }

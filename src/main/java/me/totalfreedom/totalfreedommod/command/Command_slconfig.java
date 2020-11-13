@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import me.totalfreedom.totalfreedommod.config.ConfigEntry;
-import me.totalfreedom.totalfreedommod.discord.Discord;
 import me.totalfreedom.totalfreedommod.player.FPlayer;
 import me.totalfreedom.totalfreedommod.rank.Rank;
 import me.totalfreedom.totalfreedommod.staff.StaffMember;
@@ -107,13 +106,6 @@ public class Command_slconfig extends FreedomCommand
                     plugin.rm.updateDisplay(player);
                 }
 
-                if (plugin.dc.enabled && ConfigEntry.DISCORD_ROLE_SYNC.getBoolean())
-                {
-                    Discord.syncRoles(staffMember, plugin.pl.getData(staffMember.getName()).getDiscordID());
-                }
-
-                plugin.ptero.updateAccountStatus(staffMember);
-
                 msg("Set " + staffMember.getName() + "'s rank to " + rank.getName());
                 return true;
             }
@@ -187,12 +179,6 @@ public class Command_slconfig extends FreedomCommand
                     }
                 }
 
-                if (plugin.pl.isPlayerImpostor(player))
-                {
-                    msg("This player was labeled as a Player impostor and is not a staff member, therefore they cannot be added to the staff list.", ChatColor.RED);
-                    return true;
-                }
-
                 if (staffMember == null) // New staff member
                 {
                     if (player == null)
@@ -206,7 +192,6 @@ public class Command_slconfig extends FreedomCommand
 
                     plugin.sl.addAdmin(staffMember);
                     plugin.rm.updateDisplay(player);
-                    plugin.ptero.updateAccountStatus(staffMember);
                 }
                 else // Existing staff member
                 {
@@ -239,11 +224,6 @@ public class Command_slconfig extends FreedomCommand
                         plugin.rm.updateDisplay(player);
                     }
 
-                    if (plugin.dc.enabled && ConfigEntry.DISCORD_ROLE_SYNC.getBoolean())
-                    {
-                        plugin.dc.syncRoles(staffMember, plugin.pl.getData(player).getDiscordID());
-                    }
-                    plugin.ptero.updateAccountStatus(staffMember);
                 }
 
                 if (player != null)
@@ -293,13 +273,6 @@ public class Command_slconfig extends FreedomCommand
                     plugin.rm.updateDisplay(player);
                     plugin.pl.getPlayer(player).setStaffChat(false);
                 }
-
-                if (plugin.dc.enabled && ConfigEntry.DISCORD_ROLE_SYNC.getBoolean())
-                {
-                    Discord.syncRoles(staffMember, plugin.pl.getData(staffMember.getName()).getDiscordID());
-                }
-
-                plugin.ptero.updateAccountStatus(staffMember);
 
                 return true;
             }

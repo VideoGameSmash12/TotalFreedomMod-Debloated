@@ -36,9 +36,6 @@ server:
   # All players who show up as executive
   executives: []
 
-  # All those who can manage the master builder list
-  master_builder_management: []
-
   # URL players should appeal for bans at
   ban_url: ''
 
@@ -50,130 +47,6 @@ server:
 
   # What to display at the bottom of the tab list
   tablist_footer: ''
-
-# Discord
-discord:
-  # If you do not have a token, make a bot account and get one at https://discordapp.com/developers/applications/me
-  token: ''
-  # The official discord server's ID for this server
-  server_id: ''
-  # Channel to send /report messages to
-  report_channel_id: ''
-  # Channel for discord to minecraft and vice-versa
-  chat_channel_id: ''
-  # Do you want roles to sync with the server?
-  role_sync: false
-  # Master Builder role ID
-  master_builder_role_id: ''
-  # Admin role ID
-  admin_role_id: ''
-  # Senior Admin role ID
-  senior_admin_role_id: ''
-  # Developer role ID
-  developer_role_id: ''
-  # Executive Admin role ID
-  executive_role_id: ''
-  # Owner role ID
-  server_owner_role_id: ''
-
-# Reddit
-reddit:
-  # Name of your subreddit (the r/NAME, excluding r/)
-  subreddit_name: 'TotalFreedom'
-  # Username of the bot account
-  username: ''
-  # Bot account password
-  password: ''
-  # Developer app id (Make one at https://www.reddit.com/prefs/apps (make sure the type is script))
-  client_id: ''
-  # Developer app secret
-  client_secret: ''
-  # Master Builder flair ID
-  master_builder_flair_id: ''
-  # Admin flair ID
-  admin_flair_id: ''
-  # Senior Admin flair ID
-  senior_admin_flair_id: ''
-  # Developer flair ID
-  developer_flair_id: ''
-  # Executive Admin flair ID
-  executive_flair_id: ''
-  # Owner flair ID
-  server_owner_flair_id: ''
-
-# Pterodactyl
-ptero:
-  # URL - do not leave a trailing forward slash
-  url: ''
-  # The default email domain used to set email addresses for new users - do not include the @
-  default_email_domain: 'example.com'
-  # Server UUID
-  server_uuid: ''
-  # Admin panel API key
-  admin_key: ''
-  # Server API key
-  server_key: ''
-  
-# The shop
-shop:
-  # Enable the shop
-  enabled: true
-
-  # Shop title
-  title: '&e&lTotalFreedom Shop'
-  
-  # Shop prefix
-  prefix: '&8[&eTF Shop&8]'
-
-  # How many coins to voters get per vote?
-  coins_per_vote: 20
-
-  # Chat reactions
-  reactions:
-
-    # Enable chat reactions?
-    enabled: true
-
-    # How much time (in seconds) before a new reaction prompt is made
-    interval: 300
-
-    # How much time do players have to react
-    time: 30.0
-
-    # How many coins do winners get?
-    coins_per_win: 5
-
-    # How long is the random string (in characters)?
-    string_length: 10
-
-  # Login messages. Use %name% for usernames, and %rank% for ranks/titles
-  login_messages:
-    - '%name% is a terrible %coloredrank%'
-    - 'that %name% dude is a shitty %coloredrank%'
-    - 'Hi, my name is %name% and I''m %art% %coloredrank%&b that wasted coins on this login message.'
-    - '&aDo not fear, %coloredrank% &b%name% &ais here!'
-    - '%name% is %art% %coloredrank%&b, say hi to them before they gets banned for doing something stupid'
-    - 'Oh. It''s &l%name%&r&b the %coloredrank%&b again. Great.'
-    - 'Make way for %name% the %coloredrank%&b!'
-    - 'It''s a bird! It''s a plane! No, it''s %art% %rank%! It''s %name%'
-    - '%rank% %name%'
-    - '%coloredrank%&b %name%'
-    - 'A wild %name%, %art% %coloredrank%&b, appeared!'
-    - 'All in all, the %rank% %name% is just another brick in the wall'
-    - '&a%name% &bis a a geeky &6%rank%'
-    - '%name% is the %rank% who just exists'
-    - '%name% based cringe poggers based based %rank%'
-    - '%name% thinks that &dWindows Server 2019 &bis the best server OS'
-
-  # Item prices
-  prices:
-    grappling_hook: 100
-    lightning_rod: 1000
-    fire_ball: 500
-    rideable_pearl: 700
-    stacking_potato: 300
-    clown_fish: 1500
-    login_messages: 5000
 
 # Staff list
 stafflist:
@@ -359,13 +232,6 @@ disable:
   night: true
   weather: true
 
-
-# Enable misc. features
-landmines_enabled: false
-mp44_enabled: false
-tossmob_enabled: false
-4chan_enabled: false
-
 # Moblimiter
 moblimiter:
   enabled: true
@@ -435,22 +301,6 @@ staffinfo:
   - ' &6- Report those breaking the rules'
   - ' &2- And apply on our forums at the link:'
   - '    &9https://forum.totalfreedom.me/'
-  
-# What to display in the vote command.
-votinginfo:
-  - '&bVoting Links:'
-  - ' &6- https://minecraft-mp.com/server/228386/vote/'
-  - ' &2- https://minecraft-server-list.com/server/443272/vote/'
-  - ' &6- https://topg.org/Minecraft/in-518809'
-
-# What to display in the Master Builder info command.
-masterbuilderinfo:
-  - '&bHow to apply for Master Builder on the TotalFreedom Server:'
-  - ' &6- Do not ask for Master Builder in game'
-  - ' &2- Screenshot some of your previous builds (be ready to prove that the builds are yours)'
-  - ' &6- Copy the template and create a thread on our forums'
-  - ' &2- Template:'
-  - '    &9bit.ly/TFMasterBuilderTemplate'
 
 # Famous players - cannot be banned by username
 famous_players:

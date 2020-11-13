@@ -19,15 +19,11 @@ public class WorldManager extends FreedomService
 
     public Flatlands flatlands;
     public StaffWorld staffworld;
-    public MasterBuilderWorld masterBuilderWorld;
-    public HubWorld hubworld;
 
     public WorldManager()
     {
         this.flatlands = new Flatlands();
         this.staffworld = new StaffWorld();
-        this.masterBuilderWorld = new MasterBuilderWorld();
-        this.hubworld = new HubWorld();
     }
 
     @Override
@@ -35,8 +31,6 @@ public class WorldManager extends FreedomService
     {
         flatlands.getWorld();
         staffworld.getWorld();
-        masterBuilderWorld.getWorld();
-        hubworld.getWorld();
 
         // Disable weather
         if (ConfigEntry.DISABLE_WEATHER.getBoolean())
@@ -56,8 +50,6 @@ public class WorldManager extends FreedomService
     {
         flatlands.getWorld().save();
         staffworld.getWorld().save();
-        masterBuilderWorld.getWorld().save();
-        hubworld.getWorld().save();
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -66,14 +58,6 @@ public class WorldManager extends FreedomService
         try
         {
             if (event.getWorld().equals(staffworld.getWorld()) && staffworld.getWeatherMode() != WorldWeather.OFF)
-            {
-                return;
-            }
-            else if (event.getWorld().equals(masterBuilderWorld.getWorld()) && masterBuilderWorld.getWeatherMode() != WorldWeather.OFF)
-            {
-                return;
-            }
-            else if (event.getWorld().equals(hubworld.getWorld()) && hubworld.getWeatherMode() != WorldWeather.OFF)
             {
                 return;
             }
@@ -94,14 +78,6 @@ public class WorldManager extends FreedomService
         try
         {
             if (event.getWorld().equals(staffworld.getWorld()) && staffworld.getWeatherMode() != WorldWeather.OFF)
-            {
-                return;
-            }
-            else if (event.getWorld().equals(masterBuilderWorld.getWorld()) && masterBuilderWorld.getWeatherMode() != WorldWeather.OFF)
-            {
-                return;
-            }
-            else if (event.getWorld().equals(hubworld.getWorld()) && hubworld.getWeatherMode() != WorldWeather.OFF)
             {
                 return;
             }

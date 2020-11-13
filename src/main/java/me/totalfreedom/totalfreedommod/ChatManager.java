@@ -54,17 +54,6 @@ public class ChatManager extends FreedomService
         message = FUtil.colorize(message);
         message = message.replaceAll(ChatColor.MAGIC.toString(), "&k");
 
-        if (ConfigEntry.SHOP_ENABLED.getBoolean() && ConfigEntry.SHOP_REACTIONS_ENABLED.getBoolean() && !plugin.sh.reactionString.isEmpty() && message.equals(plugin.sh.reactionString))
-        {
-            event.setCancelled(true);
-            PlayerData data = plugin.pl.getData(player);
-            data.setCoins(data.getCoins() + plugin.sh.coinsPerReactionWin);
-            plugin.pl.save(data);
-            plugin.sh.endReaction(player.getName());
-            player.sendMessage(ChatColor.GREEN + "You have been given " + ChatColor.GOLD + plugin.sh.coinsPerReactionWin + ChatColor.GREEN + " coins!");
-            return;
-        }
-
         if (!ConfigEntry.TOGGLE_CHAT.getBoolean() && !plugin.sl.isStaff(player))
         {
             event.setCancelled(true);
@@ -95,21 +84,6 @@ public class ChatManager extends FreedomService
             return;
         }
 
-        // Check for 4chan trigger
-        Boolean green = ChatColor.stripColor(message).toLowerCase().startsWith(">");
-        Boolean orange = ChatColor.stripColor(message).toLowerCase().endsWith("<");
-        if (ConfigEntry.FOURCHAN_ENABLED.getBoolean())
-        {
-            if (green)
-            {
-                message = ChatColor.GREEN + message;
-            }
-            else if (orange)
-            {
-                message = ChatColor.GOLD + message;
-            }
-        }
-
         // Finally, set message
         event.setMessage(message);
 
@@ -134,12 +108,6 @@ public class ChatManager extends FreedomService
 
         // Set format
         event.setFormat(format);
-
-        // Send to discord
-        if (!ConfigEntry.STAFF_ONLY_MODE.getBoolean() && !Bukkit.hasWhitelist() && !plugin.pl.getPlayer(player).isMuted() && !plugin.tfg.inGuildChat(player))
-        {
-            plugin.dc.messageChatChannel(plugin.dc.deformat(player.getName()) + " \u00BB " + ChatColor.stripColor(message));
-        }
     }
 
     public ChatColor getColor(Displayable display)

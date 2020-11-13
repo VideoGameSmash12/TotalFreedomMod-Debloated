@@ -46,20 +46,6 @@ operators:
   - "worldguard.region.removemember.own.*"
   - "worldguard.region.info.*"
 
-# Master Builder permission nodes
-master_builders:
-  - "worldedit.tool.*"
-  - "worldedit.brush.*"
-  - "worldedit.snow"
-  - "worldedit.green"
-  - "worldedit.extinguish"
-  - "worldedit.thaw"
-  - "worldguard.region.bypass.hubworld"
-  - "worldguard.region.bypass.masterbuilderworld"
-  - "voxelsniper.sniper"
-  - "voxelsniper.goto"
-  - "voxelsniper.brush.*"
-
 # Admin permission nodes
 admins:
   - "coreprotect.*"

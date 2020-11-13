@@ -30,7 +30,6 @@ public class PlayerList extends FreedomService
     public void onStart()
     {
         dataMap.clear();
-        loadMasterBuilders();
     }
 
     @Override
@@ -46,29 +45,6 @@ public class PlayerList extends FreedomService
         }
     }
 
-    public void loadMasterBuilders()
-    {
-        ResultSet resultSet = plugin.sql.getMasterBuilders();
-
-        if (resultSet == null)
-        {
-            return;
-        }
-
-        try
-        {
-            while (resultSet.next())
-            {
-                PlayerData playerData = load(resultSet);
-                dataMap.put(playerData.getName(), playerData);
-            }
-        }
-        catch (SQLException e)
-        {
-            FLog.severe("Failed to parse master builders: " + e.getMessage());
-        }
-    }
-
     public String getIp(OfflinePlayer player)
     {
         if (player.isOnline())
@@ -79,44 +55,6 @@ public class PlayerList extends FreedomService
         final PlayerData entry = getData(player.getName());
 
         return (entry == null ? null : entry.getIps().iterator().next());
-    }
-
-    public List<String> getMasterBuilderNames()
-    {
-        List<String> masterBuilders = new ArrayList<>();
-        for (PlayerData playerData : plugin.pl.dataMap.values())
-        {
-            if (playerData.isMasterBuilder())
-            {
-                masterBuilders.add(playerData.getName());
-            }
-        }
-        return masterBuilders;
-    }
-
-    public boolean canManageMasterBuilders(String name)
-    {
-        PlayerData data = getData(name);
-
-        if ((!ConfigEntry.HOST_SENDER_NAMES.getStringList().contains(name.toLowerCase()) && data != null && !ConfigEntry.SERVER_OWNERS.getStringList().contains(data.getName()))
-                && !ConfigEntry.SERVER_EXECUTIVES.getStringList().contains(data.getName())
-                && !isTelnetMasterBuilder(data)
-                && !ConfigEntry.HOST_SENDER_NAMES.getStringList().contains(name.toLowerCase()))
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isTelnetMasterBuilder(PlayerData playerData)
-    {
-        StaffMember staffMember = plugin.sl.getEntryByName(playerData.getName());
-        if (staffMember != null && staffMember.getRank().isAtLeast(Rank.ADMIN) && playerData.isMasterBuilder())
-        {
-            return true;
-        }
-
-        return false;
     }
 
     // May not return null
@@ -153,43 +91,6 @@ public class PlayerList extends FreedomService
         return new PlayerData(resultSet);
     }
 
-    public Boolean isPlayerImpostor(Player player)
-    {
-        PlayerData playerData = getData(player);
-        return plugin.dc.enabled
-                && !plugin.sl.isStaff(player)
-                && (playerData.hasVerification())
-                && !playerData.getIps().contains(FUtil.getIp(player));
-    }
-
-    public boolean IsImpostor(Player player)
-    {
-        return isPlayerImpostor(player) || plugin.sl.isStaffImpostor(player);
-    }
-
-    public void verify(Player player, String backupCode)
-    {
-        PlayerData playerData = getData(player);
-        if (backupCode != null)
-        {
-            playerData.removeBackupCode(backupCode);
-        }
-
-        playerData.addIp(FUtil.getIp(player));
-        save(playerData);
-
-        if (plugin.sl.isStaffImpostor(player))
-        {
-            StaffMember staffMember = plugin.sl.getEntryByName(player.getName());
-            staffMember.setLastLogin(new Date());
-            staffMember.addIp(FUtil.getIp(player));
-            plugin.sl.updateTables();
-            plugin.sl.save(staffMember);
-        }
-
-        plugin.rm.updateDisplay(player);
-    }
-
     public void syncIps(StaffMember staffMember)
     {
         PlayerData playerData = getData(staffMember.getName());
@@ -210,7 +111,6 @@ public class PlayerList extends FreedomService
             plugin.sl.save(staffMember);
         }
     }
-
 
     public void save(PlayerData player)
     {
@@ -264,7 +164,7 @@ public class PlayerList extends FreedomService
         // Create new data if nonexistent
         if (playerData == null)
         {
-            FLog.info("Creating new player verification entry for " + player.getName());
+            FLog.info("Creating new player data entry for " + player.getName());
 
             // Create new player
             playerData = new PlayerData(player);

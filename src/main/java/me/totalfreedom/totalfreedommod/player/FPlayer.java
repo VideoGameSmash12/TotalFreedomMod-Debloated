@@ -47,13 +47,6 @@ public class FPlayer
     private final CageData cageData = new CageData(this);
     private boolean isOrbiting = false;
     private double orbitStrength = 10.0;
-    private boolean mobThrowerEnabled = false;
-    private EntityType mobThrowerEntity = EntityType.PIG;
-    private double mobThrowerSpeed = 4.0;
-    private final List<LivingEntity> mobThrowerQueue = new ArrayList<>();
-    private BukkitTask mp44ScheduleTask = null;
-    private boolean mp44Armed = false;
-    private boolean mp44Firing = false;
     private BukkitTask lockupScheduleTask = null;
     private boolean lockedUp = false;
     private String lastMessage = "";
@@ -194,86 +187,6 @@ public class FPlayer
     public void resetFreecamPlaceCount()
     {
         this.freecamPlaceCount = 0;
-    }
-
-    public void enableMobThrower(EntityType mobThrowerCreature, double mobThrowerSpeed)
-    {
-        this.mobThrowerEnabled = true;
-        this.mobThrowerEntity = mobThrowerCreature;
-        this.mobThrowerSpeed = mobThrowerSpeed;
-    }
-
-    public void disableMobThrower()
-    {
-        this.mobThrowerEnabled = false;
-    }
-
-    public EntityType mobThrowerCreature()
-    {
-        return this.mobThrowerEntity;
-    }
-
-    public double mobThrowerSpeed()
-    {
-        return this.mobThrowerSpeed;
-    }
-
-    public boolean mobThrowerEnabled()
-    {
-        return this.mobThrowerEnabled;
-    }
-
-    public void enqueueMob(LivingEntity mob)
-    {
-        mobThrowerQueue.add(mob);
-        if (mobThrowerQueue.size() > 4)
-        {
-            LivingEntity oldmob = mobThrowerQueue.remove(0);
-            if (oldmob != null)
-            {
-                oldmob.damage(500.0);
-            }
-        }
-    }
-
-    public void startArrowShooter(TotalFreedomMod plugin)
-    {
-        this.stopArrowShooter();
-        this.mp44ScheduleTask = new ArrowShooter(this.player).runTaskTimer(plugin, 1L, 1L);
-        this.mp44Firing = true;
-    }
-
-    public void stopArrowShooter()
-    {
-        if (this.mp44ScheduleTask != null)
-        {
-            this.mp44ScheduleTask.cancel();
-            this.mp44ScheduleTask = null;
-        }
-        this.mp44Firing = false;
-    }
-
-    public void armMP44()
-    {
-        this.mp44Armed = true;
-        this.stopArrowShooter();
-    }
-
-    public void disarmMP44()
-    {
-        this.mp44Armed = false;
-        this.stopArrowShooter();
-    }
-
-    public boolean isMP44Armed()
-    {
-        return this.mp44Armed;
-    }
-
-    public boolean toggleMP44Firing()
-    {
-        this.mp44Firing = !this.mp44Firing;
-        return mp44Firing;
     }
 
     public boolean isMuted()

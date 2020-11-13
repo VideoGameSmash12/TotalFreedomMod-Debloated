@@ -39,26 +39,21 @@ public class PermissionManager extends FreedomService
         permissions.clear();
 
         List<String> operatorPermissions;
-        List<String> masterBuilderPermissions;
         List<String> adminPermissions;
         List<String> senioradminPermissions;
 
         operatorPermissions = PermissionEntry.OPERATORS.getEntry();
         permissions.put(Rank.OP, operatorPermissions);
 
-        masterBuilderPermissions = PermissionEntry.MASTER_BUILDERS.getEntry();
-        masterBuilderPermissions.addAll(operatorPermissions);
-        permissions.put(Title.MASTER_BUILDER, masterBuilderPermissions);
-
         adminPermissions = PermissionEntry.ADMINS.getEntry();
-        adminPermissions.addAll(masterBuilderPermissions);
+        adminPermissions.addAll(operatorPermissions);
         permissions.put(Rank.ADMIN, adminPermissions);
 
         senioradminPermissions = PermissionEntry.SENIOR_ADMINS.getEntry();
         senioradminPermissions.addAll(adminPermissions);
         permissions.put(Rank.SENIOR_ADMIN, senioradminPermissions);
 
-        int count = PermissionEntry.OPERATORS.getEntry().size() + PermissionEntry.MASTER_BUILDERS.getEntry().size() + PermissionEntry.ADMINS.getEntry().size() + PermissionEntry.SENIOR_ADMINS.getEntry().size();
+        int count = PermissionEntry.OPERATORS.getEntry().size() + PermissionEntry.ADMINS.getEntry().size() + PermissionEntry.SENIOR_ADMINS.getEntry().size();
 
         FLog.info("Loaded " + count + " permission nodes");
     }
@@ -91,17 +86,6 @@ public class PermissionManager extends FreedomService
             for (String node : nodes)
             {
                 attachment.setPermission(node, true);
-            }
-        }
-
-        if (plugin.pl.getData(player).isMasterBuilder() && !plugin.sl.isStaff(player))
-        {
-            if (nodes != null)
-            {
-                for (String node : permissions.get(Title.MASTER_BUILDER))
-                {
-                    attachment.setPermission(node, true);
-                }
             }
         }
 

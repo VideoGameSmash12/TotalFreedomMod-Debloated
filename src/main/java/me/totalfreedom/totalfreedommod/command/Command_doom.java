@@ -51,11 +51,6 @@ public class Command_doom extends FreedomCommand
             staffMember.setActive(false);
             plugin.sl.save(staffMember);
             plugin.sl.updateTables();
-            plugin.ptero.updateAccountStatus(staffMember);
-            if (plugin.dc.enabled && ConfigEntry.DISCORD_ROLE_SYNC.getBoolean())
-            {
-                plugin.dc.syncRoles(staffMember, plugin.pl.getData(staffMember.getName()).getDiscordID());
-            }
         }
 
         // Remove from whitelist

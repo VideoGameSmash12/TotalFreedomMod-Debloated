@@ -26,7 +26,6 @@ public class Module_players extends HTTPDModule
 
         final JSONArray players = new JSONArray();
         final JSONArray onlinestaff = new JSONArray();
-        final JSONArray masterbuilders = new JSONArray();
         final JSONArray admins = new JSONArray();
         final JSONArray senioradmins = new JSONArray();
         final JSONArray developers = new JSONArray();
@@ -60,9 +59,6 @@ public class Module_players extends HTTPDModule
                     break;
             }
         }
-
-        masterbuilders.addAll(plugin.pl.getMasterBuilderNames());
-
         // Developers
         developers.addAll(FUtil.DEVELOPER_NAMES);
 
@@ -70,7 +66,6 @@ public class Module_players extends HTTPDModule
         executives.addAll(ConfigEntry.SERVER_EXECUTIVES.getList());
 
         responseObject.put("players", players);
-        responseObject.put("masterbuilders", masterbuilders);
         responseObject.put("admins", admins);
         responseObject.put("senioradmins", senioradmins);
         responseObject.put("developers", developers);

@@ -200,13 +200,6 @@
         </dependency>
 
         <dependency>
-            <groupId>net.dv8tion</groupId>
-            <artifactId>JDA</artifactId>
-            <version>4.2.0_168</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>net.coreprotect</groupId>
             <artifactId>coreprotect</artifactId>
             <version>19.1</version>
@@ -235,13 +228,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.vexsoftware</groupId>
-            <artifactId>votifier</artifactId>
-            <version>v1.9</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>net.goldtreeservers</groupId>
             <artifactId>worldguardextraflags</artifactId>
             <version>4.0.0</version>
@@ -263,24 +249,10 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.TotalFreedomMC</groupId>
-            <artifactId>TFGuilds</artifactId>
-            <version>db036fb187</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-checkstyle-plugin</artifactId>
             <version>3.1.1</version>
             <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>net.dean.jraw</groupId>
-            <artifactId>JRAW</artifactId>
-            <version>1.1.0</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 

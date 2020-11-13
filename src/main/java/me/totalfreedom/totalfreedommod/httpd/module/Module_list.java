@@ -28,7 +28,6 @@ public class Module_list extends HTTPDModule
 
             final JSONArray operators = new JSONArray();
             final JSONArray imposters = new JSONArray();
-            final JSONArray masterbuilders = new JSONArray();
             final JSONArray admins = new JSONArray();
             final JSONArray senioradmins = new JSONArray();
             final JSONArray developers = new JSONArray();
@@ -46,11 +45,6 @@ public class Module_list extends HTTPDModule
                 if (isImposter(player))
                 {
                     imposters.add(player.getName());
-                }
-
-                if (plugin.pl.getData(player).isMasterBuilder())
-                {
-                    masterbuilders.add(player.getName());
                 }
 
                 if (FUtil.DEVELOPERS.contains(player.getName()))
@@ -90,7 +84,6 @@ public class Module_list extends HTTPDModule
 
             responseObject.put("operators", operators);
             responseObject.put("imposters", imposters);
-            responseObject.put("masterbuilders", masterbuilders);
             responseObject.put("admins", admins);
             responseObject.put("senioradmins", senioradmins);
             responseObject.put("developers", developers);
@@ -133,7 +126,7 @@ public class Module_list extends HTTPDModule
 
     public boolean isImposter(Player player)
     {
-        if (plugin.sl.isStaffImpostor(player) || plugin.pl.isPlayerImpostor(player))
+        if (plugin.sl.isStaffImpostor(player))
         {
             return true;
         }
